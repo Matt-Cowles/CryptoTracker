@@ -5,8 +5,11 @@ import mongoose from "mongoose";
 import ejsMate from "ejs-mate";
 import path from "path";
 import url from "url";
+import methodOverride from "method-override";
 
-main().catch((err) => console.log(err));
+main()
+  .then(() => console.log("mognoose connected"))
+  .catch((err) => console.log(err));
 
 async function main() {
   await mongoose.connect("mongodb://localhost:27017/crypto-tracker");
