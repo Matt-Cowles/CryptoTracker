@@ -7,6 +7,7 @@ import path from "path";
 import url from "url";
 import methodOverride from "method-override";
 import session from "express-session";
+import MongoStore from "connect-mongo";
 import passport from "passport";
 import LocalStrategy from "passport-local";
 
@@ -30,6 +31,20 @@ app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, "public")));
+
+const sessionOptions = {
+  secret: "thisisabadsecret",
+  resave: false,
+  saveUninitialized: false,
+  store: MongoStore.create({
+    mongoUrl: dbUrl,
+    // autoRemove: "interval",
+    // autoRemoveInterval: 1, // In minutes. Default
+  }),
+  cookie: { path: "/", httpOnly: true, maxAge: 1800000 }, // Cookie expires after 30min
+};
+
+app.use(session(sessionOptions));
 
 app.use(passport.initialize());
 
