@@ -1,18 +1,12 @@
 <nav class="navbar navbar-expand-lg sticky-top">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/">BitBurger</a>
+    <a class="navbar-brand" href="/">Tracker</a>
     <div class="middle-nav d-flex justify-content-between">
       <ul class="navbar-nav mb-2 mb-lg-0">
         <!-- <li class="nav-item ms-5 me-5">
           <a class="nav-link" aria-current="page" href="/bitburger">Menu</a>
         </li> -->
-        <% if (user) { %>
-        <li class="nav-item ms-5 me-5"><%-include('./userOptions', { user })%></li>
-        <% } else { %>
-        <li class="nav-item ms-5 me-5"><%-include('./userForms')%></li>
-        <% } %>
       </ul>
     </div>
-    <%- include('../cart/shoppingCart', { cart }) %>
   </div>
 </nav>
