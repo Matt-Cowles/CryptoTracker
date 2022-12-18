@@ -11,7 +11,7 @@ import MongoStore from "connect-mongo";
 import passport from "passport";
 import LocalStrategy from "passport-local";
 
-import User from "./models/user";
+import * as User from "./models/user.js";
 
 main()
   .then(() => console.log("mognoose connected"))
