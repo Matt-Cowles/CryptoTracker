@@ -6,6 +6,7 @@ import ejsMate from "ejs-mate";
 import path from "path";
 import url from "url";
 import methodOverride from "method-override";
+import session from "express-session";
 import passport from "passport";
 import LocalStrategy from "passport-local";
 
