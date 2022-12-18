@@ -1,0 +1,30 @@
+<%- layout('layouts/boilerplate') %>
+
+<div class="container">
+  <div class="btn-container d-flex justify-content-between">
+    <button class="btn"></button>
+    <button class="btn"></button>
+    <button class="btn"></button>
+    <button class="btn"></button>
+    <button class="btn"></button>
+  </div>
+
+  <div class="title-card">Crypto Tracker</div>
+  <table>
+    <% for (let item of listings) { %>
+    <tr>
+      <td><%=item.market_cap_rank%></td>
+      <td><img src="<%=item.image%>" alt="" class="item-image" /></td>
+      <td><%=item.name%> (<%=item.symbol%>)</td>
+      <td>
+        <% if(item.current_price > 0.01) { %>
+        <!-- If current price is more than .01, only display 2 decimal points -->
+        <%=item.current_price.toFixed(2)%> <% } else { %>
+        <!-- Else display all the decimal points -->
+        <%=item.current_price%> <% } %>
+      </td>
+      <td><%=item.price_change_percentage_24h_in_currency.toFixed(2)%> %</td>
+    </tr>
+    <% } %>
+  </table>
+</div>
