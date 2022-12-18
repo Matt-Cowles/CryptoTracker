@@ -1,0 +1,64 @@
+<div class="modal fade" id="loginModal" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Login</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="/login" method="POST" class="needs-validation" novalidate>
+          <div class="mb-3">
+            <label class="form-label" for="username">Username</label>
+            <input class="form-control" type="text" id="username" name="username" required />
+            <div class="valid-feedback">Looks good!</div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="password">Password</label>
+            <input class="form-control" type="password" id="password" name="password" required />
+            <div class="valid-feedback">Looks good!</div>
+          </div>
+          <div class="mt-4 mb-3 ms-4">
+            <button class="btn btn-outline-primary offset-3 mt-3 mb-3" data-bs-target="#signUpModal" data-bs-toggle="modal" type="button">Don't Have an Account?</button>
+          </div>
+          <div class="modal-footer d-flex justify-content-between">
+            <a class="btn btn-outline-secondary ms-5" data-bs-dismiss="modal">Close</a>
+            <button class="btn btn-success me-5" type="submit">Login</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="signUpModal" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Sign Up</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="/register" method="POST" class="needs-validation" novalidate>
+          <div class="mb-3">
+            <label class="form-label" for="username">Username*</label>
+            <input class="form-control" type="text" id="username" name="username" required />
+            <div class="valid-feedback">Looks good!</div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="email">Email</label>
+            <input class="form-control" type="email" id="email" name="email" />
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="password">Password*</label>
+            <input class="form-control" type="password" id="password" name="password" required />
+            <div class="valid-feedback">Looks good!</div>
+          </div>
+        </div>
+        <div class="modal-footer d-flex justify-content-between">
+          <a class="btn btn-outline-secondary ms-5" data-bs-target="#loginModal" data-bs-toggle="modal">Go Back to Login</a>
+          <button class="btn btn-success me-5" type="submit">Register</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<a type="button" class="nav-link" data-bs-toggle="modal" data-bs-target="#loginModal">Sign In</a>
