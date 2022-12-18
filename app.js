@@ -6,6 +6,10 @@ import ejsMate from "ejs-mate";
 import path from "path";
 import url from "url";
 import methodOverride from "method-override";
+import passport from "passport";
+import LocalStrategy from "passport-local";
+
+import User from "./models/user";
 
 main()
   .then(() => console.log("mognoose connected"))
@@ -25,6 +29,8 @@ app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, "public")));
+
+app.use(passport.initialize());
 
 app.get("/tracker", async (req, res) => {
   const response = await fetch("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false&price_change_percentage=1h%2C24h%2C7d");
