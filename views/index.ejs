@@ -1,15 +1,13 @@
 <%- layout('layouts/boilerplate') %>
 
 <div class="container">
-  <div class="btn-container d-flex justify-content-between">
-    <button class="btn"></button>
-    <button class="btn"></button>
-    <button class="btn"></button>
-    <button class="btn"></button>
-    <button class="btn"></button>
+  <div class="btn-container d-flex justify-content-center">
+    <button class="btn btn-outline-primary m-3">Top 25</button>
+    <button class="btn btn-outline-primary m-3">Top 50</button>
+    <button class="btn btn-outline-primary m-3">Favorites</button>
   </div>
 
-  <div class="title-card">Crypto Tracker</div>
+  <div class="title-card text-center mt-3">Crypto Tracker</div>
   <table>
     <% for (let item of listings) { %>
     <tr>
