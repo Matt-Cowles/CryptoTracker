@@ -37,7 +37,7 @@ const sessionOptions = {
   resave: false,
   saveUninitialized: false,
   store: MongoStore.create({
-    mongoUrl: dbUrl,
+    mongoUrl: "mongodb://localhost:27017/crypto-tracker",
     // autoRemove: "interval",
     // autoRemoveInterval: 1, // In minutes. Default
   }),
