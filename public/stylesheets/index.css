@@ -6,12 +6,21 @@ table {
   color: white;
 }
 
+td {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
 .image-cell {
-  width: 15%;
+  width: 10%;
 }
 
 .item-image {
-  width: 40%;
+  width: 50px;
+}
+
+.name {
+  padding: 0 20px;
 }
 
 .item-link {
@@ -26,5 +35,33 @@ table {
 
 .bi-star:hover {
   color: black;
-  /* background-color: yellow; */
+}
+
+.hidden {
+  display: none;
+}
+
+@media screen and (max-width: 958px) {
+  table {
+    font-size: 17px;
+  }
+
+  td {
+    padding-left: 0.5px;
+    padding-right: 0.5px;
+  }
+
+  .item-image {
+    width: 30px;
+  }
+
+  .name {
+    padding-left: 20px;
+    padding-right: 15px;
+  }
+
+  svg {
+    height: 16px;
+    width: 16px;
+  }
 }
