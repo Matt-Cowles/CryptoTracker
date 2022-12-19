@@ -9,26 +9,26 @@
     <button class="btn btn-outline-primary m-3">Favorites</button>
   </div>
 
-  <div class="title-card text-center mt-3">Crypto Tracker</div>
+  <div class="title-card text-center mt-3 mb-5 text-white fs-2">Crypto Tracker</div>
   <table class="w-100">
     <thead class="text-center">
       <tr>
-        <th class="pb-3">Rank</th>
+        <th class="rank pb-3">Rank</th>
         <th class="pb-3">Image</th>
         <th class="pb-3">Name (abv)</th>
         <th class="pb-3">Price</th>
-        <th class="pb-3">24h % Change</th>
+        <th class="24h-change pb-3">24h % Change</th>
         <th class="pb-3">Favorite?</th>
       </tr>
     </thead>
     <% for (let item of listings) { %>
     <form action="/<%=item.market_cap_rank%>/favorites?_method=PUT" method="POST">
       <tr>
-        <td class="text-center pb-3"><%=item.market_cap_rank%></td>
+        <td class="rank text-center pb-3"><%=item.market_cap_rank%></td>
         <td class="text-center pb-3 image-cell">
           <img src="<%=item.image%>" alt="" class="item-image" />
         </td>
-        <td class="text-center pb-3">
+        <td class="name text-center pb-3">
           <a href="https://www.coingecko.com/en/coins/<%=item.id%>" class="item-link"><%=item.name%> (<%=item.symbol%>)</a>
         </td>
         <td class="text-center pb-3">
@@ -38,8 +38,8 @@
           <!-- Else display all the decimal points -->
           $<%=item.current_price%> <% } %>
         </td>
-        <td class="text-center pb-3 ps-5 pe-5"><%=item.price_change_percentage_24h_in_currency.toFixed(2)%> %</td>
-        <td class="text-center pb-3">
+        <td class="24h-change text-center pb-3 ps-5 pe-5"><%=item.price_change_percentage_24h_in_currency.toFixed(2)%> %</td>
+        <td class="text-center pb-4">
           <button class="btn">
             <%if(user && user.favorites.includes(item.name)) {%>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="yellow" class="bi bi-star-fill" viewBox="0 0 16 16">
@@ -57,3 +57,26 @@
     <% } %>
   </table>
 </div>
+
+<script>
+  const windowSize = window.innerWidth;
+  if (windowSize <= 958) {
+    const changeCol = document.getElementsByClassName("24h-change");
+    for (let element of changeCol) {
+      element.classList.add("hidden");
+    }
+    const rankCol = document.getElementsByClassName("rank");
+    for (let element of rankCol) {
+      element.classList.add("hidden");
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", function (event) {
+    const scrollpos = localStorage.getItem("scrollpos");
+    if (scrollpos) window.scrollTo(0, scrollpos);
+  });
+
+  window.onbeforeunload = function (e) {
+    localStorage.setItem("scrollpos", window.scrollY);
+  };
+</script>
