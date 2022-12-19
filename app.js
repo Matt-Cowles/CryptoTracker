@@ -11,18 +11,22 @@ import MongoStore from "connect-mongo";
 import flash from "connect-flash";
 import passport from "passport";
 import LocalStrategy from "passport-local";
+import * as dotenv from "dotenv";
+dotenv.config();
 
 import User from "./models/user.js";
 
+const dbUrl = process.env.DB_URL;
+// "mongodb://localhost:27017/crypto-tracker"
 main()
   .then(() => {
-    mongoose.set("strictQuery", false);
     console.log("mognoose connected");
   })
   .catch((err) => console.log(err));
 
 async function main() {
-  await mongoose.connect("mongodb://localhost:27017/crypto-tracker");
+  await mongoose.connect(dbUrl);
+  mongoose.set("strictQuery", false);
 }
 
 // New __dirname due to ES Modules
@@ -42,9 +46,7 @@ const sessionOptions = {
   resave: false,
   saveUninitialized: false,
   store: MongoStore.create({
-    mongoUrl: "mongodb://localhost:27017/crypto-tracker",
-    // autoRemove: "interval",
-    // autoRemoveInterval: 1, // In minutes. Default
+    mongoUrl: dbUrl,
   }),
   cookie: { path: "/", httpOnly: true, maxAge: 1800000 }, // Cookie expires after 30min
 };
@@ -59,6 +61,7 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 app.use((req, res, next) => {
+  res.locals.session = req.session;
   res.locals.currentUser = req.user;
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");
@@ -76,9 +79,12 @@ app.get("/tracker", async (req, res) => {
   }
   const user = req.session.user;
 
+  const queryFilter = req.query.filter;
+  console.log(queryFilter);
+
   // console.log(listings);
 
-  res.render("./index", { listings, user });
+  res.render("./index", { listings, user, queryFilter });
 });
 
 app.put("/:id/favorites", async (req, res) => {
@@ -122,7 +128,7 @@ app.post("/register", async (req, res) => {
   }
 });
 
-app.post("/login", passport.authenticate("local", { failureFlash: true, failureRedirect: "/bitburger" }), (req, res) => {
+app.post("/login", passport.authenticate("local", { failureFlash: true, failureRedirect: "/tracker" }), (req, res) => {
   req.flash("success", `Welcome back ${req.body.username}!`);
   res.redirect("/tracker");
 });
